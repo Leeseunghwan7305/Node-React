@@ -1,8 +1,22 @@
+import React from "react";
+import "./about.css";
 const About = () => {
   return (
     <div>
-      <h1>소개</h1>
-      <p>리액트 라우터를 사용해 보는 프로젝트입니다.</p>
+      <div className="nav">
+        <div>Todo App</div>
+        <div>Home</div>
+        <div>Write</div>
+        <div>임시</div>
+      </div>
+
+      <form action="/add" method="post">
+        <label>할일</label>
+        <input type="text"></input>
+        <label>Due date</label>
+        <input type="text"></input>
+        <button type="submit">Submit</button>
+      </form>
     </div>
   );
 };

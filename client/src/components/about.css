@@ -1,0 +1,24 @@
+.nav {
+  display: flex;
+  justify-content: flex-start;
+  background-color: #eee;
+  margin-bottom: 35px;
+}
+.nav div {
+  padding: 10px;
+  font-size: 2em;
+}
+.nav div:nth-child(1) {
+  font-size: 2em;
+}
+form {
+  display: flex;
+  flex-direction: column;
+  width: 50%;
+  margin: 0 auto;
+}
+form input,
+form button {
+  padding: 30px;
+  margin-bottom: 40px;
+}
