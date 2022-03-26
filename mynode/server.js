@@ -66,3 +66,19 @@ app.get("/list", (req, res) => {
       res.send(data);
     });
 });
+app.delete("/delete", (req, res) => {
+  req.body._id = parseInt(req.body._id);
+  console.log(req.body._id);
+  db.collection("post").deleteOne(req.body, function (error, result) {
+    console.log("삭제완료!");
+    res.status(200).send({ message: "성공했습니다" });
+  });
+});
+app.get("/detail/:id", function (req, res) {
+  db.collection("post").findOne(
+    { _id: parseInt(req.params.id) },
+    function (error, result) {
+      res.send(result);
+    }
+  );
+});

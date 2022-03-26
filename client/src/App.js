@@ -6,6 +6,7 @@ import About from "./components/About";
 import Home from "./components/Home";
 import Add from "./components/Add";
 import List from "./components/List";
+import Detail from "./components/Detail";
 function App() {
   const sendRequest = async () => {
     const response = await axios.get("http://localhost:8080/about");
@@ -24,6 +25,7 @@ function App() {
         <Route path="/Home" element={<Home />} />
         <Route path="/add" element={<Add />} />
         <Route path="/list" element={<List />} />
+        <Route path="/detail/:id" element={<Detail />} />
       </Routes>
     </div>
   );
