@@ -1,0 +1,9 @@
+.list {
+  border: 1px solid black;
+  margin: 1em;
+  font-size: 2em;
+}
+.list button {
+  padding: 1.2em;
+  border: none;
+}
