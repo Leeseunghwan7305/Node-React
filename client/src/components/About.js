@@ -31,7 +31,7 @@ const About = () => {
       .post("http://localhost:8080/add", body)
       .then((res) => console.log(res));
 
-    navigate("/add");
+    navigate("/list");
   };
 
   return (

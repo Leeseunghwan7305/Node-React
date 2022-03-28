@@ -5,39 +5,6 @@ import { useNavigate } from "react-router-dom";
 
 const Login = () => {
   let navigate = useNavigate();
-  const [id, SetId] = useState("");
-  const [Password, SetPassword] = useState("");
-
-  const emailHandler = (e) => {
-    e.preventDefault();
-    SetId(e.target.value);
-  };
-
-  const passwordHandler = (e) => {
-    e.preventDefault();
-    SetPassword(e.target.value);
-  };
-
-  const submitHandler = (e) => {
-    e.preventDefault();
-    // state에 저장한 값을 가져옵니다.
-
-    let body = {
-      todo: id,
-      date: Password,
-    };
-
-    axios
-      .post("http://localhost:8080/login", body)
-      .then((res) => {
-        alert("로그인성공");
-        navigate("/");
-      })
-      .catch((error) => {
-        alert("로그인실패");
-        navigate("/fail");
-      });
-  };
 
   return (
     <>
@@ -51,17 +18,14 @@ const Login = () => {
         }}
       >
         <form
-          onSubmit={submitHandler}
+          action="/login"
+          method="POST"
           style={{ display: "flex", flexDirection: "Column" }}
         >
           <label>아이디</label>
-          <input type="text" value={id} onChange={emailHandler}></input>
+          <input name="id" type="text"></input>
           <label>비밀번호</label>
-          <input
-            type="text"
-            value={Password}
-            onChange={passwordHandler}
-          ></input>
+          <input name="pw" type="text"></input>
           <button type="submit">Login</button>
         </form>
       </div>

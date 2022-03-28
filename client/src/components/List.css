@@ -7,3 +7,19 @@
   padding: 1.2em;
   border: none;
 }
+.search-box {
+  display: flex;
+  width: 80%;
+  align-items: center;
+  height: 100px;
+  margin: 0 auto;
+}
+.search {
+  padding: 1.4em;
+  flex: 1;
+}
+.search-button {
+  padding: 1.4em;
+  background-color: pink;
+  border: none;
+}

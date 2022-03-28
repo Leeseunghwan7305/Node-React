@@ -116,7 +116,7 @@ app.post(
   "/login",
   passport.authenticate("local", { failureRedirect: "/fail" }),
   (req, res) => {
-    console.log("로그인성공");
+    res.send("로그인성공");
   }
 );
 
@@ -147,3 +147,32 @@ passport.use(
     }
   )
 );
+
+passport.serializeUser(function (user, done) {
+  done(null, user.id);
+});
+
+passport.deserializeUser(function (아이디, done) {
+  done(null, {});
+});
+
+app.post("/search", (req, res) => {
+  console.log(req.body.todo);
+  let search2 = [
+    {
+      $search: {
+        index: "todoSearch",
+        text: {
+          query: req.body.data.todo,
+          path: "todo", // 제목날짜 둘다 찾고 싶으면 ['제목', '날짜']
+        },
+      },
+    },
+  ];
+  db.collection("post")
+    .aggregate(search2)
+    .toArray((req, data) => {
+      console.log(data);
+      res.send(data);
+    });
+});
