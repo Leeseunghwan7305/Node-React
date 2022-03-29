@@ -116,6 +116,9 @@ app.post(
   "/login",
   passport.authenticate("local", { failureRedirect: "/fail" }),
   (req, res) => {
+    console.log("안녕");
+    console.log(req.body.data.id);
+    console.log(req.body.data.pw);
     res.send("로그인성공");
   }
 );
@@ -129,7 +132,7 @@ passport.use(
       passReqToCallback: false,
     },
     function (입력한아이디, 입력한비번, done) {
-      //console.log(입력한아이디, 입력한비번);
+      console.log(입력한아이디, 입력한비번);
       db.collection("login").findOne(
         { id: 입력한아이디 },
         function (에러, 결과) {
