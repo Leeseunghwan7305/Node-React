@@ -9,6 +9,7 @@ import List from "./components/List";
 import Detail from "./components/Detail";
 import Edit from "./components/Edit";
 import Login from "./components/Login";
+import Upload from "./components/Upload";
 function App() {
   const sendRequest = async () => {
     const response = await axios.get("http://localhost:8080/about");
@@ -30,6 +31,7 @@ function App() {
         <Route path="/detail/:id" element={<Detail />} />
         <Route path="/edit/:id" element={<Edit />} />
         <Route path="/login" element={<Login />} />
+        <Route path="/upload" element={<Upload />} />
         <Route path="*" />
       </Routes>
     </div>

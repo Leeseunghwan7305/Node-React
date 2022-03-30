@@ -2,6 +2,7 @@ const express = require("express");
 const path = require("path");
 const cors = require("cors");
 const app = express();
+const fs = require("fs").promises;
 require("dotenv").config();
 const bodyParser = require("body-parser");
 const { send } = require("process");
@@ -178,4 +179,27 @@ app.post("/search", (req, res) => {
       console.log(data);
       res.send(data);
     });
+});
+
+//router.get
+//router.use("/shirts",로그인했니)
+
+const multer = require("multer");
+const storage = multer.diskStorage({
+  destination: "./public/img/",
+  filename: function (req, file, cb) {
+    cb(null, "imgfile" + Date.now() + path.extname(file.originalname));
+  },
+});
+
+const upload = multer({
+  storage: storage,
+  limits: { fileSize: 1000000 },
+});
+
+app.post("/upload", upload.single("img"), function (req, res, next) {
+  console.log(req.file);
+  res.send({
+    fileName: req.file.filename,
+  });
 });
