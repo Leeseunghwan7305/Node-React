@@ -7,6 +7,7 @@ require("dotenv").config();
 const bodyParser = require("body-parser");
 const { send } = require("process");
 app.use(bodyParser.urlencoded({ extended: true }));
+const fileupload = require("express-fileupload");
 const MongoClient = require("mongodb").MongoClient;
 let db;
 MongoClient.connect(process.env.DB_URL, function (error, client) {
@@ -23,6 +24,8 @@ MongoClient.connect(process.env.DB_URL, function (error, client) {
 
 const server = require("http").createServer(app);
 app.use(express.json());
+app.use(fileupload());
+app.use(express.static("files"));
 app.use(cors()); // cors 미들웨어를 삽입합니다.
 app.get("/", (req, res) => {
   // 요청패스에 대한 콜백함수를 넣어줍니다.
@@ -197,9 +200,15 @@ const upload = multer({
   limits: { fileSize: 1000000 },
 });
 
-app.post("/upload", upload.single("img"), function (req, res, next) {
-  console.log(req.file);
-  res.send({
-    fileName: req.file.filename,
+app.post("/upload", (req, res) => {
+  const newpath = __dirname + "/files/";
+  const file = req.files.file;
+  const filename = file.name;
+
+  file.mv(`${newpath}${filename}`, (err) => {
+    if (err) {
+      res.status(500).send({ message: "File upload failed", code: 200 });
+    }
+    res.status(200).send({ message: "File Uploaded", code: 200 });
   });
 });
